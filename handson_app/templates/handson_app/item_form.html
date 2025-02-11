@@ -1,0 +1,38 @@
+{% extends 'handson_app/base.html' %}
+{% load tailwind_tags %}
+
+{% block content %}
+<div class="max-w-md mx-auto bg-white shadow-md rounded-lg p-6">
+    <h1 class="text-2xl font-bold text-gray-800 mb-6">
+        {% if form.instance.pk %}
+            アイテムの編集
+        {% else %}
+            新規アイテムの作成
+        {% endif %}
+    </h1>
+
+    <form method="post" class="space-y-4">
+        {% csrf_token %}
+        <div>
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="{{ form.name.id_for_label }}">
+                名前
+            </label>
+            {{ form.name }}
+        </div>
+        <div>
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="{{ form.description.id_for_label }}">
+                説明
+            </label>
+            {{ form.description }}
+        </div>
+        <div class="flex items-center justify-between">
+            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                保存
+            </button>
+            <a href="{% url 'handson_app:item_list' %}" class="text-blue-500 hover:text-blue-800">
+                キャンセル
+            </a>
+        </div>
+    </form>
+</div>
+{% endblock %}
